@@ -1,8 +1,6 @@
 package banking.account;
 
 import banking.database.Database;
-
-import java.util.Arrays;
 import java.util.Random;
 
 public class Account {
@@ -34,8 +32,8 @@ public class Account {
 
 
     public void createCard(){
-        createPinCode();
         createCardNumber();
+        createPinCode();
         balance = 0;
     }
 
@@ -47,16 +45,43 @@ public class Account {
     }
 
     private void createCardNumber(){
+        do{
+            cardNumber = gererateLuhnCardNumber();
+        } while(db.ifCardExist(cardNumber));
+    }
+
+    private String gererateLuhnCardNumber (){
         Random random = new Random();
+        String tmp = "";
+        int сheckSum = 0;
+        for (int i = 0; i < 9; i++) {
+            tmp = tmp + random.nextInt(10);
+        }
+        tmp = "400000" + tmp; //15 чисел. Надо найти сумму после применения алгоритма
 
-        do {
-            String tmp = "";
-            for (int i = 0; i < 10; i++) {
-                tmp = tmp + random.nextInt(10);
-            }
-            cardNumber = "400000" + tmp;
+        boolean isOdd = true;
+        int nSum = 0;
+        for (int i = 14; i >= 0; i--){
+            int d = tmp.charAt(i) - '0';
+            if (isOdd == true)
+                d = d * 2;
+            // We add two digits to handle
+            // cases that make two digits
+            // after doubling
+            nSum += d / 10;
+            nSum += d % 10;
 
-        } while (db.ifCardExist(cardNumber));
+            isOdd = !isOdd;
+        }
+        if (nSum % 10 == 0) {
+            сheckSum = 0;
+        }
+        else {
+            сheckSum = (9- (nSum % 10)) + 1;
+        }
+        tmp = tmp + String.valueOf(сheckSum);
+        return tmp;
     }
 }
+
 

@@ -33,11 +33,6 @@ public class LogingWindow implements Window {
                     //Создаем аккаунт - в нем пин код и баланс = 0
                     Account account = new Account();
                     account.createCard();
-                    //Если такая карта уже есть в бд, пересоздаем, пока не создадим отстутствующую
-                    //while (db.ifCardExist(account.getCardNumber())) {
-                    //    account = new Account();
-                    //}
-                    //Добавляем карту в бд
                     db.addAccount(account);
                     System.out.println("Your card has been created");
                     System.out.println("Your card number:");
