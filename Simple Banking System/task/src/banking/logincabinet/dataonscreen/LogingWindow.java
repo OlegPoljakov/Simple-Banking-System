@@ -33,7 +33,8 @@ public class LogingWindow implements Window {
                     //Создаем аккаунт - в нем пин код и баланс = 0
                     Account account = new Account();
                     account.createCard();
-                    db.addAccount(account);
+                    //db.addAccount(account);
+                    db.saveToDBSQlite(account);
                     System.out.println("Your card has been created");
                     System.out.println("Your card number:");
                     System.out.println(account.getCardNumber());
@@ -49,14 +50,17 @@ public class LogingWindow implements Window {
                     String inputCardPin = sc.next();
 
                     if (validation.isValidPinCode(inputCardPin) && validation.isValidCardNumber(inputCardNumber)) {
-                        if(db.ifCardExist(inputCardNumber)){
-                            if (db.getPinByCardNumber(inputCardNumber).equals(inputCardPin))
+                        //if(db.ifCardExist(inputCardNumber)){
+                        if(db.ifCardExistSQlite(inputCardNumber)){
+                            if (db.getPinByCardNumberSQlite(inputCardNumber).equals(inputCardPin))
                                 isOk = true;
+
                         }
                     }
                     if (isOk) {
                         System.out.println("You have successfully logged in!");
-                        Main.enteredaccount = db.getAccountByCardNumber(inputCardNumber);
+                        //Main.enteredaccount = db.getAccountByCardNumber(inputCardNumber);
+                        Main.enteredaccount = db.getAccountByCardNumberSQlite(inputCardNumber);
                         Main.logged = true;
                         break outerloop;
                     }
@@ -66,6 +70,7 @@ public class LogingWindow implements Window {
                     break;
 
                 case 0:
+                    System.out.println("Bye!");
                     System.exit(0);
 
             }

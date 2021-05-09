@@ -1,9 +1,7 @@
-banking/logincabinet/dataonscreen/WindowFactory.java
- banking.logincabinet.dataonscreen.WindowFactory
-banking/datavalidation/InputDataValidation.java
- banking.datavalidation.InputDataValidation
 banking/logincabinet/Window.java
  banking.logincabinet.Window
+banking/datavalidation/InputDataValidation.java
+ banking.datavalidation.InputDataValidation
 banking/account/Account.java
  banking.account.Account
 banking/Main.java
@@ -14,3 +12,5 @@ banking/logincabinet/dataonscreen/LogingWindow.java
  banking.logincabinet.dataonscreen.LogingWindow
 banking/database/Database.java
  banking.database.Database
+banking/logincabinet/dataonscreen/WindowFactory.java
+ banking.logincabinet.dataonscreen.WindowFactory

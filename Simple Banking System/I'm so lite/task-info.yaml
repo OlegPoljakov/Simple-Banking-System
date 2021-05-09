@@ -894,6 +894,15 @@ files:
         }
     }
   learner_created: true
+- name: src/banking/TEST.db
+  visible: true
+  learner_created: true
+- name: card.s3db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/93/stages/517/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sun, 09 May 2021 20:11:57 UTC
+record: 3

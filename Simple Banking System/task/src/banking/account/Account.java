@@ -14,12 +14,16 @@ public class Account {
         db = new Database();
     }
 
-    public int getBalance() {
-        return balance;
-    }
-
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public void setPinCode(String pinCode) {
+        this.pinCode = pinCode;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public String getPinCode() {
@@ -30,6 +34,9 @@ public class Account {
         return cardNumber;
     }
 
+    public int getBalance() {
+        return balance;
+    }
 
     public void createCard(){
         createCardNumber();
@@ -47,7 +54,8 @@ public class Account {
     private void createCardNumber(){
         do{
             cardNumber = gererateLuhnCardNumber();
-        } while(db.ifCardExist(cardNumber));
+        //} while(db.ifCardExist(cardNumber));
+        } while(db.ifCardExistSQlite(cardNumber));
     }
 
     private String gererateLuhnCardNumber (){

@@ -28,13 +28,15 @@ public class LoggedWindow implements Window {
             switch (option) {
 
                 case 1:
-                    System.out.println(Main.enteredaccount.getBalance());
+                    //System.out.println(Main.enteredaccount.getBalance());
+                    System.out.println(db.getBalanceSQlite(Main.enteredaccount));
                     break;
                 case 2:
                     Main.logged = false;
                     Main.enteredaccount = null;
                     break outerloop;
                 case 0:
+                    System.out.println("Bye!");
                     System.exit(0);
             }
         }
