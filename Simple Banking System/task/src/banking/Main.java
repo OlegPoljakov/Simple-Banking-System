@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
         String url = "jdbc:sqlite:" + args[1];
+        //String url = "jdbc:sqlite:D:\\Java\\HyperSkill Projects\\Simple Banking System\\Simple-Banking-System\\Simple Banking System\\task\\src\\banking\\TEST.db";
         Database database = new Database(url);
         //Открыте подключеня, создание бд, если не создана, закрытие соединения
         database.createDBSQlite();

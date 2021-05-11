@@ -1210,6 +1210,15 @@ files:
         }
     }
   learner_created: true
+- name: src/banking/response/Response.java
+  visible: true
+  learner_created: true
+- name: src/banking/TEST.db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/93/stages/518/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Tue, 11 May 2021 13:17:22 UTC
 record: -1

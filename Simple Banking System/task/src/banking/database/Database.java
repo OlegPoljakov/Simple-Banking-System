@@ -204,4 +204,75 @@ public class Database {
         }
         return balance;
     }
+
+    public void updateBalanceSQlite(int sum, Account account) {
+        String get = "UPDATE card SET balance = balance + ? WHERE number = ?";
+
+        SQLiteDataSource dataSource = new SQLiteDataSource();
+        dataSource.setUrl(url);
+
+        try (Connection con = dataSource.getConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(get)) {
+
+                preparedStatement.setInt(1, sum);
+                preparedStatement.setString(2, account.getCardNumber());
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closeAccountSQlite(Account account) {
+        String get = "DELETE FROM card WHERE number = ?";
+
+        SQLiteDataSource dataSource = new SQLiteDataSource();
+        dataSource.setUrl(url);
+
+        try (Connection con = dataSource.getConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(get)) {
+
+                preparedStatement.setString(1, account.getCardNumber());
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void transferMoney(int sum, String cardNumber, Account account) {
+        String increase = "UPDATE card SET balance = balance + ? WHERE number = ?";
+        String decrease = "UPDATE card SET balance = balance - ? WHERE number = ?";
+
+        SQLiteDataSource dataSource = new SQLiteDataSource();
+        dataSource.setUrl(url);
+
+        try (Connection con = dataSource.getConnection()) {
+
+            try (PreparedStatement preparedStatement = con.prepareStatement(increase)) {
+                preparedStatement.setInt(1, sum);
+                preparedStatement.setString(2, cardNumber);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try (PreparedStatement preparedStatement = con.prepareStatement(decrease)) {
+                preparedStatement.setInt(1, sum);
+                preparedStatement.setString(2, account.getCardNumber());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
